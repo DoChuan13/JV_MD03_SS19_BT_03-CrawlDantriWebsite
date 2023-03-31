@@ -21,10 +21,16 @@ public class CrawlWebsite {
             scanner.close();
             content = content.replaceAll("\\n+", "");
             Pattern p = Pattern.compile("article-title\">(.*?)</h3>");
-//            Pattern p = Pattern.compile("20230331054313067.htm\">(.*?)</a>");
             Matcher m = p.matcher(content);
             while (m.find()) {
-                System.out.println(m.group(1));
+                String text = m.group(1);
+                String[] textArr = text.split(".htm\">");
+                String finalText = "";
+                for (int i = 0; i < textArr[1].length()-4; i++) {
+                    finalText += textArr[1].charAt(i);
+                }
+                System.out.println(finalText);
+//                System.out.println(m.group(1));
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
