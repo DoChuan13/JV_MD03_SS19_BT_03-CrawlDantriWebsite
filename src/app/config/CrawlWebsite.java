@@ -25,12 +25,9 @@ public class CrawlWebsite {
             while (m.find()) {
                 String text = m.group(1);
                 String[] textArr = text.split(".htm\">");
-                String finalText = "";
-                for (int i = 0; i < textArr[1].length()-4; i++) {
-                    finalText += textArr[1].charAt(i);
-                }
+                String finalText = textArr[1].replaceAll("</a>","");
+                finalText = finalText.replaceAll("&quot;","\"");
                 System.out.println(finalText);
-//                System.out.println(m.group(1));
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
